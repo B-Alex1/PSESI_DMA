@@ -1,0 +1,43 @@
+#include"dma.h"
+#include<stdio.h>
+
+#define N 10
+
+int main (int argc, char* argv[]) {
+  DMA_init();
+
+  show_jobs();
+
+  int tab1[N];
+  int tab2[N];
+  for(int i = 0; i < N; i++) {
+    tab1[i] = i;
+    tab2[i] = 0;
+    printf("tab1[%d] = %d  |  tab2[%d] = %d\n", i, tab1[i], i, tab2[i]);
+  }
+
+  tab_lock tl_tab1;
+  tl_tab1.lock_src = 0;
+  tl_tab1.lock_trg = 1;
+  tl_tab1.tab = tab1;
+
+  tab_lock tl_tab2;
+  tl_tab2.lock_src = 1;
+  tl_tab2.lock_trg = 0;
+  tl_tab2.tab = tab2;
+  
+  int job = DMA_job(tl_tab1, tl_tab2, N);
+  show_jobs();
+
+  DMA_sim();
+  show_jobs();
+
+  DMA_done(job);
+  for(int i = 0; i < N; i++) {
+    printf("tab1[%d] = %d  |  tab2[%d] = %d\n", i, tab1[i], i, tab2[i]);
+  }
+  show_jobs();
+
+  return 0;
+
+}
