@@ -7,14 +7,11 @@ PROGRAMS = sim_dma
 
 all: $(PROGRAMS)
 
-sim_dma: dma.o main.o
+sim_dma: dma.o dma_sim.o extra.o main.o
 	$(CC) -o $@ $(CFLAGS) $^
 
-dma.o: dma.c
-	gcc $(CFLAGS) -c dma.c
-
-main.o: main.c
-	gcc $(CFLAGS) -c main.c
+%.o: %.c
+	gcc $(CFLAGS) -c $^
 
 clean:
 	rm -f *.o *~ $(PROGRAMS)
