@@ -20,8 +20,17 @@ Une structure racine contiedra 4 pointeurs qui ponteront vers:
 
 ### Structure d'un job
 
-src_deb, src_end, trg_src, trg_end, lock_read, lock_write, taille, id  
-logiquement : 8 element * 1 mot = 8 mots, un job a besoin de 8 mots. 
+src_deb:        Première adresse à copier du tableau src
+src_end:        Dernière adresse à copier du tableau src
+trg_src:        Dernière adresse à copier du tableau src
+trg_end:        Première adresse à copier du tableau src
+src_lock_read:  Verrou de lecture pour le tableau src
+src_lock_write: Verrou d'écriture pour le tableau src
+trg_lock_read:  Verrou de lecture pour le tableau trg
+trg_lock_write: Verrou d'écriture pour le tableau trg
+size:           Taille des deux tableaux
+id:             ID du job
+next:           Pointeur vers le prochain job dans la liste chaînée
 
 Locks gérés par l'utilisateur.
 

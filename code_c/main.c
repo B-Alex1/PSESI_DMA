@@ -16,16 +16,9 @@ int main (int argc, char* argv[]) {
     printf("tab1[%d] = %d  |  tab2[%d] = %d\n", i, tab1[i], i, tab2[i]);
   }
 
-  tab_lock tl_tab1;
-  tl_tab1.lock_src = 0;
-  tl_tab1.lock_trg = 1;
-  tl_tab1.tab = tab1;
-
-  tab_lock tl_tab2;
-  tl_tab2.lock_src = 1;
-  tl_tab2.lock_trg = 0;
-  tl_tab2.tab = tab2;
-  
+  tab_lock* tl_tab1 = make_tab_lock(tab1, SRC_LOCK);
+  tab_lock* tl_tab2 = make_tab_lock(tab2, TRG_LOCK);
+    
   int job = DMA_job(tl_tab1, tl_tab2, N);
   show_jobs();
 
@@ -37,6 +30,9 @@ int main (int argc, char* argv[]) {
     printf("tab1[%d] = %d  |  tab2[%d] = %d\n", i, tab1[i], i, tab2[i]);
   }
   show_jobs();
+
+  free_tab_lock(tl_tab1);
+  free_tab_lock(tl_tab2);
 
   return 0;
 
