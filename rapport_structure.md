@@ -55,6 +55,7 @@ La structure étant manipulé par la DMA et le processeur, elle est soumise a de
 ### Pseudo code des fonction vu processeur
 
 #### DMA_submit:
+```
 paramètre( source, target, size, id) //id sera addresse de la case du job ?? non on l'a pas encore 
     lock (racine->free){
         job=racine.free
@@ -62,6 +63,9 @@ paramètre( source, target, size, id) //id sera addresse de la case du job ?? no
         si(racine.free){
             
         }
-    }
+    } 
+
+
+```
 
 //dsl je crois que je sais pas écrire de pseudo code, on dirait que jevais l'écrire en c la mdrrr
